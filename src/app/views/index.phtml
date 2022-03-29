@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <link rel="stylesheet" href="/assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .login-icon {
+            font-size: 80px;
+            color: #0B5ED7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <hr>
+        <?php
+        echo"Navigation: ";
+        echo $this->tag->linkTo(
+            [
+                'product',
+                'Product List!',
+                'class' => 'btn btn-info mx-2'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'product/add',
+                'Add Product!',
+                'class' => 'btn btn-success mx-2'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'order',
+                'Order List!',
+                'class' => 'btn btn-info mx-2'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'order/add',
+                'Order Add!',
+                'class' => 'btn btn-success mx-2'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'setting',
+                'Change settings!',
+                'class' => 'btn btn-warning mx-2'
+            ]
+        );
+        ?>
+        <hr>
+        <?php echo $this->getContent(); ?>
+    </div>
+    <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
