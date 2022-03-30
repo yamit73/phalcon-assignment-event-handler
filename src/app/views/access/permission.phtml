@@ -1,0 +1,39 @@
+<h1 class="text-center text-warning">Grant Access to controllers</h1>
+<div class="w-50 m-auto">
+<?php echo $this->tag->form('');?>
+<label for="product_id" class="form-label">Select Role</label>
+<select class="form-select" name="role" aria-label="Default select example">
+  <option value="" selected></option>
+    <?php
+        foreach ($roles as $role) {
+            echo '<option value="'.$role->role.'">'.$role->role.'</option>';
+        }
+    ?>
+</select>
+
+<label for="controller" class="form-label">Select component</label>
+<select class="form-select" name="controller" onchange="form.submit()" aria-label="Default select example">
+  <option value="" selected></option>
+    <?php
+        foreach ($controllers as $value) {
+            echo '<option value="'.$value.'">'.$value.'</option>';
+        }
+    ?>
+</select>
+<label for="action" class="form-label">Select Action</label>
+<select class="form-select" name="action" aria-label="Default select example">
+  <option value="" selected></option>
+    <?php
+        foreach ($actions['setting'] as $value) {
+            
+            echo '<option value="'.$value.'">'.$value.'</option>';
+        }
+    ?>
+</select>
+
+<?php
+echo $this->tag->submitButton(["Place Order", 'class'=>"btn btn-primary mt-3"]);
+?>
+</form>
+</div>
+<div class="alert alert-danger w-50 m-auto mt-2"><?php if (isset($message)) echo $message; ?></div>

@@ -16,45 +16,67 @@
 
 <body>
     <div class="container-fluid">
-        <hr>
+
+        <div class="mt-3 text-center">
         <?php
-        echo"Navigation: ";
         echo $this->tag->linkTo(
             [
                 'product',
                 'Product List!',
-                'class' => 'btn btn-info mx-2'
+                'class' => 'btn btn-sm btn-info mx-1'
             ]
         );
         echo $this->tag->linkTo(
             [
                 'product/add',
                 'Add Product!',
-                'class' => 'btn btn-success mx-2'
+                'class' => 'btn btn-sm btn-success mx-1'
             ]
         );
         echo $this->tag->linkTo(
             [
                 'order',
                 'Order List!',
-                'class' => 'btn btn-info mx-2'
+                'class' => 'btn btn-sm btn-info mx-1'
             ]
         );
         echo $this->tag->linkTo(
             [
                 'order/add',
                 'Order Add!',
-                'class' => 'btn btn-success mx-2'
+                'class' => 'btn btn-sm btn-success mx-1'
             ]
         );
         echo $this->tag->linkTo(
             [
                 'setting',
                 'Change settings!',
-                'class' => 'btn btn-warning mx-2'
+                'class' => 'btn btn-sm btn-warning mx-1'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'role/add',
+                'Add roles!',
+                'class' => 'btn btn-sm btn-info mx-1'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'component/add',
+                'Add components!',
+                'class' => 'btn btn-sm btn-info mx-1'
+            ]
+        );
+        echo $this->tag->linkTo(
+            [
+                'access/permission',
+                'Grant access!',
+                'class' => 'btn btn-sm btn-danger mx-1'
             ]
         );
         ?>
+        </div>
         <hr>
         <?php echo $this->getContent(); ?>
     </div>

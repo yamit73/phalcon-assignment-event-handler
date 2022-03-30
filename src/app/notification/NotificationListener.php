@@ -51,4 +51,26 @@ class NotificationListener extends Injectable
         }
         return $data;
     }
+
+    public function beforeHandleRequest(Event $event, \Phalcon\Mvc\Application $application)
+    {
+        $controller=$this->router->getControllerName() ?? 'index';
+        $action=$this->router->getActionName() ?? 'index';
+        $aclFile=APP_PATH.'/security/acl.cache';
+        if (is_file($aclFile)==true) {
+            $acl=unserialize(
+                file_get_contents($aclFile)
+            );
+            // die("request event fired");
+            $role=$application->request->get('role');
+            if ($acl->isAllowed($role, $controller, $action)===true) {
+                var_dump('Access granted');
+            } else {
+                die('Access denied!');
+            }
+        } else {
+            die('acl file does not exist!');
+        }
+        
+    }
 }
