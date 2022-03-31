@@ -13,6 +13,6 @@ class IndexController extends Controller
     
     public function indexAction()
     {
-        $this->response->redirect('product');
+        // $this->response->redirect('product');
     }
 }
