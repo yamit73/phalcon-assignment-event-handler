@@ -24,17 +24,29 @@ class AccessController extends Controller
             array_push($controllers, $val->name);
             $actions[$val->name]=explode(',', $val->actions);
         }
-        echo(json_encode($controllers));
-        echo(json_encode($actions['order']));
         
         $this->view->controllers=$controllers;
         $this->view->actions=$actions;
-        // if ($this->request->isPost()) {
-        //     $component=new Components();
-        //     //code to sanitize data using escaper
-        //     $postData = $this->request->getPost();
-        //     $escaper=new \App\Components\MyEscaper();
-        //     $data=$escaper->sanitize($postData);
-        // }
+        
+        if ($this->request->isPost()) {
+            $component=$this->request->getPost('components');
+            $this->view->selComponent=$component;
+            $role=$this->request->getPost('role');
+            $this->view->selrole=$role;
+            $action=$this->request->getPost('actions');
+
+            $permission= new Permissions();
+            if ($action !='') {
+                $permission->assign(
+                    $this->request->getPost(),
+                    [
+                        'role',
+                        'components',
+                        'actions'
+                    ]
+                );
+                $permission->save();
+            }
+        }
     }
 }

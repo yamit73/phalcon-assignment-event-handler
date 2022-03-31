@@ -1,30 +1,40 @@
+<?php //die($selComponent);?>
 <h1 class="text-center text-warning">Grant Access to controllers</h1>
 <div class="w-50 m-auto">
 <?php echo $this->tag->form('');?>
-<label for="product_id" class="form-label">Select Role</label>
+<label for="role" class="form-label">Select Role</label>
 <select class="form-select" name="role" aria-label="Default select example">
   <option value="" selected></option>
     <?php
         foreach ($roles as $role) {
-            echo '<option value="'.$role->role.'">'.$role->role.'</option>';
+            if ($selrole==$role->role) {
+                echo '<option value="'.$role->role.'" selected>'.$role->role.'</option>';
+            } else {
+                echo '<option value="'.$role->role.'">'.$role->role.'</option>';
+            }
         }
     ?>
 </select>
 
-<label for="controller" class="form-label">Select component</label>
-<select class="form-select" name="controller" onchange="form.submit()" aria-label="Default select example">
+<label for="components" class="form-label">Select component</label>
+<select class="form-select" name="components" onchange="form.submit()" aria-label="Default select example">
   <option value="" selected></option>
     <?php
         foreach ($controllers as $value) {
-            echo '<option value="'.$value.'">'.$value.'</option>';
+            if ($value==$selComponent) {
+                echo '<option value="'.$value.'" selected>'.$value.'</option>';
+            } else {
+                echo '<option value="'.$value.'">'.$value.'</option>';
+            }
+            
         }
     ?>
 </select>
-<label for="action" class="form-label">Select Action</label>
-<select class="form-select" name="action" aria-label="Default select example">
+<label for="actions" class="form-label">Select Action</label>
+<select class="form-select" name="actions" aria-label="Default select example">
   <option value="" selected></option>
     <?php
-        foreach ($actions['setting'] as $value) {
+        foreach ($actions[$selComponent] as $value) {
             
             echo '<option value="'.$value.'">'.$value.'</option>';
         }
@@ -32,7 +42,7 @@
 </select>
 
 <?php
-echo $this->tag->submitButton(["Place Order", 'class'=>"btn btn-primary mt-3"]);
+echo $this->tag->submitButton(["Grant Access!", 'class'=>"btn btn-primary mt-3"]);
 ?>
 </form>
 </div>

@@ -61,15 +61,12 @@ class NotificationListener extends Injectable
             $acl=unserialize(
                 file_get_contents($aclFile)
             );
-            // die("request event fired");
             $role=$application->request->get('role');
-            if ($acl->isAllowed($role, $controller, $action)===true) {
-                var_dump('Access granted');
-            } else {
-                die('Access denied!');
+            if ($acl->isAllowed($role, $controller, $action)!==true) {
+                die('<h1 style="color:red;">Access denied!</h1>');
             }
         } else {
-            die('acl file does not exist!');
+            $this->response->redirect('secure/buildACL');
         }
         
     }

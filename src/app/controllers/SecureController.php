@@ -6,6 +6,13 @@ use Phalcon\Acl\Component;
 
 class SecureController extends Controller
 {
+    /**
+     * Function to build ACL file
+     * adding roles, components
+     * allow access to roles
+     *
+     * @return void
+     */
     public function buildACLAction()
     {
         $aclFile=APP_PATH.'/security/acl.cache';
@@ -14,18 +21,17 @@ class SecureController extends Controller
             //add roles
             $components=Components::find();
             $roles=Roles::find();
+            $permissions=Permissions::find();
             foreach ($roles as $value) {
                 $acl->addRole($value->role);
-                // die(var_dump($value->role));
             }
             foreach ($components as $val) {
-                $acl->addComponent($val->name, [$val->actions]);
-                // die(var_dump($val->actions));
+                $acl->addComponent($val->name, explode(',', $val->actions));
             }
             $acl->allow('admin', '*', '*');
-            // $acl->allow('guest', 'product', 'index');
-            // $acl->allow('manager', 'product', 'add');
-            // $acl->allow('manager', 'product', 'index');
+            foreach ($permissions as $val) {
+                $acl->allow($val->role, $val->components, $val->actions);
+            }
             file_put_contents(
                 $aclFile,
                 serialize($acl)
@@ -35,5 +41,6 @@ class SecureController extends Controller
                 file_get_contents($aclFile)
             );
         }
+        $this->response->redirect('');
     }
 }
